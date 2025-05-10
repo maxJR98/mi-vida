@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para el amor de mi vida</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.8em;
+      color: #ff6f61;
+      text-shadow: 0 0 10px rgba(255, 111, 97, 0.7);
+      margin-bottom: 30px;
+    }
+    h2 {
+      font-size: 2em;
+      color: #ffd700;
+      margin: 40px 0 20px;
+    }
+    #intro, #message {
+      font-size: 1.2em;
+      line-height: 1.6;
+      color: #f4e1d2;
+      margin-bottom: 30px;
+    }
+    .reason {
+      font-size: 1.1em;
+      color: #f4e1d2;
+      background: rgba(255, 111, 97, 0.1);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reason.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #promise {
+      display: none;
+      margin-top: 30px;
+      font-size: 1.3em;
+      color: #ffd700;
+      font-style: italic;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1em;
+      background: #ff6f61;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #e65b50;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff6f61;
+      transform: rotate(-45deg);
+      animation: float 6s infinite;
+      opacity: 0.7;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: #ff6f61;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(-45deg);
+        opacity: 0.7;
+      }
+      50% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+      }
+      h2 {
+        font-size: 1.5em;
+      }
+      #intro, #message, .reason {
+        font-size: 1em;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Para el amor de mi vida</h1>
+    <div id="intro"></div>
+    <h2>Razones para amarte</h2>
+    <div id="reasons">
+      <div class="reason">1. Tu sonrisa ilumina mis días más oscuros, como el sol sobre el Salar de Uyuni.</div>
+      <div class="reason">2. Tu forma de ser tan auténtica me hace querer ser una mejor persona cada día.</div>
+      <div class="reason">3. Cada vez que me miras, siento que el mundo entero desaparece y solo estamos tú y yo.</div>
+      <div class="reason">4. Amo cómo me haces reír, incluso cuando estoy de mal humor, con tus ocurrencias únicas.</div>
+      <div class="reason">5. Eres mi refugio, mi hogar, sin importar donde estamos, en cualquier rincón del mundo siempre te elijo a ti.</div>
+      <div class="reason">6. Tu fortaleza para enfrentar los retos me inspira a nunca rendirme, especialmente por nosotros.</div>
+      <div class="reason">7. Los pequeños detalles, como cuando me escribes un mensaje cariñoso, hacen que mi corazón lata más fuerte.</div>
+      <div class="reason">8. Amo cómo compartimos sueños, como si el futuro ya estuviera escrito para nosotros dos.</div>
+      <div class="reason">9. Tu voz es mi melodía favorita, y no hay nada que me calme más que escucharte.</div>
+      <div class="reason">10. Te amo porque eres tú, mi chiquita hermosa, y no imagino mi vida sin tu amor.</div>
+    </div>
+    <div id="message"></div>
+    <div id="promise"></div>
+    <button id="showPromise" style="display: none;">Quiero decirte algo más...</button>
+  </div>
+  <script>
+  
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 500);
+
+    const introText = "Amor, no hay palabras suficientes para expresar lo que siento por ti. Eres el amor de mi vida, y cada momento contigo es un tesoro. Quiero recordarte por qué te amo tanto y pedirte que no dejemos que nada nos separe.";
+    let introIndex = 0;
+    const introDiv = document.getElementById('intro');
+    function typeIntro() {
+      if (introIndex < introText.length) {
+        introDiv.innerHTML += introText.charAt(introIndex);
+        introIndex++;
+        setTimeout(typeIntro, 50);
+      } else {
+        showReasons();
+      }
+    }
+    setTimeout(typeIntro, 1000);
+
+    const reasons = document.querySelectorAll('.reason');
+    function showReasons() {
+      reasons.forEach((reason, index) => {
+        setTimeout(() => {
+          reason.classList.add('show');
+          if (index === reasons.length - 1) {
+            setTimeout(typeMessage, 500);
+          }
+        }, index * 500);
+      });
+    }
+
+    const messageText = "Sé que hemos pasado por un momento difícil, y me duele pensar que te hice sentir mal. Quiero pedirte perdón de corazón, porque no imagino mi vida sin ti. Recuerdo cuando te pedí que fueras mi novia con un código, y escucharte sonreír fue el mejor momento de mi vida. Quiero volver a hacerte sonreír mi vida, y construir un futuro juntos.";
+    let messageIndex = 0;
+    const messageDiv = document.getElementById('message');
+    function typeMessage() {
+      if (messageIndex < messageText.length) {
+        messageDiv.innerHTML += messageText.charAt(messageIndex);
+        messageIndex++;
+        setTimeout(typeMessage, 50);
+      } else {
+        document.getElementById('showPromise').style.display = 'block';
+      }
+    }
+
+    document.getElementById('showPromise').addEventListener('click', () => {
+      const promiseDiv = document.getElementById('promise');
+      promiseDiv.innerHTML = "Te prometo escucharte, aprender de mis errores y trabajar cada día para ser el hombre que mereces. ¿Me das la oportunidad de demostrartelo y podemos intentarlo otra vez mi amor si?, no quiero hacer mi vida sin ti🥺❤ quiero intentarlo porque se que nos amamos mucho mi amor y se que ninguno quiere separarse TE AMO MUCHO MI VIDA";
+      promiseDiv.style.display = 'block';
+      document.getElementById('showPromise').style.display = 'none';
+      window.scrollTo({ top: promiseDiv.offsetTop, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
